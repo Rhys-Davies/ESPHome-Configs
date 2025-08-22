@@ -1,0 +1,114 @@
+substitutions:
+  name: "bauhn-ap6w-0324"
+  friendly_name: "Bauhn AP6W-0324"
+  relay_restore_mode: RESTORE_DEFAULT_OFF
+  sensor_update_interval: 10s
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  
+  project:
+    name: esphome.project-template
+    version: "1.0"
+
+bk72xx:
+  board: cb2s
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+dashboard_import:
+  package_import_url: github://Rhys-Davies/ESPHome-Configs/Bauhn_AP6W-0324/bauhn-ap6w-0324.yaml
+  import_full_config: false
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "AP6W-0324 Fallback Hotspot"
+    password: "PP3OPhoEjXqU"
+
+captive_portal:
+
+uart:
+  id: uart_1
+  rx_pin: P10 
+  tx_pin: P11
+  baud_rate: 4800
+  stop_bits: 1
+  parity: EVEN
+
+switch:
+  - platform: gpio
+    name: "Relay"
+    pin: P26
+    id: relay
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+light:
+  - platform: status_led
+    name: "Status LED"
+    id: blue_led
+    pin:
+      inverted: false
+      number: P8
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: P24
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Button"
+    id: button
+    on_press:
+      then:
+        - switch.toggle: relay
+    internal: true
+
+sensor:
+  - platform: cse7766
+    uart_id: uart_1
+    current: 
+      name: "Current"
+      filters: 
+        - throttle: ${sensor_update_interval}
+    voltage: 
+      name: "Voltage"
+      filters: 
+        - throttle: ${sensor_update_interval}
+    power: 
+      name: "Power"
+      filters:
+        - throttle: ${sensor_update_interval}
+    energy: 
+      name: "Energy"
+      filters:
+        - throttle: ${sensor_update_interval}
+    apparent_power: 
+      name: "Apparent Power"
+      filters:
+        - throttle: ${sensor_update_interval}
+    reactive_power:
+      name: "Reactive Power"
+      filters:
+        - throttle: ${sensor_update_interval}
+    power_factor:
+      name: "Power Factor"
+      filters:
+        - throttle: ${sensor_update_interval} 
+      
+      
