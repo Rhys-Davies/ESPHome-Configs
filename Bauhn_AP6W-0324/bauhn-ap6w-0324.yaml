@@ -26,7 +26,7 @@ ota:
   - platform: esphome
 
 dashboard_import:
-  package_import_url: github://Rhys-Davies/ESPHome-Configs/Bauhn_AP6W-0324/bauhn-ap6w-0324.yaml
+  package_import_url: github://Rhys-Davies/ESPHome-Configs/Bauhn_AP6W-0324/bauhn-ap6w-0324.yaml@main
   import_full_config: true
 
 wifi:
