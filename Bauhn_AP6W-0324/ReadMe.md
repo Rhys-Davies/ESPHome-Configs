@@ -1,6 +1,7 @@
 Bauhn AP6W-0324 - 6 Way Powerboard
 
 MCU: Tuya CB2S (BK7231N)
+
 Firmware version v1.0.4 can be re-flashed using Tuya-CloudCutter: https://github.com/tuya-cloudcutter/tuya-cloudcutter 
 
 Metering Chip: Chipsea CSE7759B
