@@ -1,17 +1,12 @@
-Bauhn AP5W-0624 - 5 Way Powerboard
+Bauhn AP5W-0624 - 5 Way Powerboard  
+Note: Also appears to be sold as model number APBMC1-0125-5  
+Each outlet has individually switched relays  
 
-    Note: Also appears to be sold as model number APBMC1-0125-5
-
-    Each outlet has individually switched relays
-
-MCU: Tuya CBU (BK7231N)
-
+MCU: Tuya CBU (BK7231N)  
     - Ground CEN pin to access programming mode
 
-Metering Chip: Belling BL0942
-
-    - UART, 4800Bps, 8 bits, 1 bit even check, 1 bit stop
-
+Metering Chip: Belling BL0942  
+    - UART, 4800Bps, 8 bits, 1 bit even check, 1 bit stop  
     - Use ltchiptool to copy tuya firmware and extract cal values before flashing esphome
 
 Note: Green LED is active whenever AC is present.
