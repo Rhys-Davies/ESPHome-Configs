@@ -3,6 +3,10 @@ substitutions:
   friendly_name: "Bauhn AP5W-0624"
   relay_restore_mode: RESTORE_DEFAULT_OFF
   sensor_update_interval: 15s
+  voltage_ref: ""
+  current_ref: ""
+  power_ref: ""
+  energy_ref: ""
 
 esphome:
   name: "${name}"
@@ -130,6 +134,7 @@ sensor:
     power: 
       name: "Power"
       filters:
+        - multiply: -1
         - throttle: ${sensor_update_interval}
     energy: 
       name: "Energy"
@@ -139,9 +144,9 @@ sensor:
       name: "Frequency"
       filters:
         - throttle: ${sensor_update_interval}
-    voltage_reference: ?? # DPS 22 (code: voltage_coe)
-    current_reference: ?? # DPS 23 * 10 (code: electric_coe)
-    power_reference: ??   # DPS 24 / 10 (code: power_coe)
-    energy_reference: ??  # DPS 25 (code: electricity_coe) 
+    #voltage_reference: ${voltage_ref}
+    #current_reference: ${current_ref}
+    #power_reference: ${power_ref}
+    #energy_reference: ${energy_ref}
       
       
