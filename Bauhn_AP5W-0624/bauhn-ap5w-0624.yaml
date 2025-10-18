@@ -1,0 +1,147 @@
+substitutions:
+  name: "bauhn-ap5w-0624"
+  friendly_name: "Bauhn AP5W-0624"
+  relay_restore_mode: RESTORE_DEFAULT_OFF
+  sensor_update_interval: 15s
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  
+  project:
+    name: esphome.bauhn-ap5w-0624
+    version: "1.0"
+
+bk72xx:
+  board: cbu
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+dashboard_import:
+  package_import_url: github://Rhys-Davies/ESPHome-Configs/Bauhn_AP5W-0624/bauhn-ap5w-0624.yaml@main
+  import_full_config: true
+
+wifi:
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "AP5W-0624 Fallback Hotspot"
+    password: "PP3OPhoEjXqU"
+
+captive_portal:
+
+uart:
+  id: uart_1
+  rx_pin: RX1 
+  tx_pin: TX1
+  baud_rate: 4800
+  stop_bits: 1
+  parity: EVEN
+
+switch:
+  - platform: gpio
+    name: "Relay 1"
+    pin: P6
+    id: relay1
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+switch:
+  - platform: gpio
+    name: "Relay 2"
+    pin: P7
+    id: relay2
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+switch:
+  - platform: gpio
+    name: "Relay 3"
+    pin: P8
+    id: relay3
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+switch:
+  - platform: gpio
+    name: "Relay 4"
+    pin: P9
+    id: relay4
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+switch:
+  - platform: gpio
+    name: "Relay 5"
+    pin: P24
+    id: relay5
+    icon: mdi:power-socket-au
+    restore_mode: ${relay_restore_mode}
+
+light:
+  - platform: status_led
+    name: "Status LED"
+    id: blue_led
+    pin: 
+      inverted: true
+      number: P28 
+    internal: true
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: P22 
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Button"
+    id: button
+    filters:
+      - delayed_on_off: 100ms
+    on_press:
+      then:
+        - switch.toggle: relay1
+        - switch.toggle: relay2
+        - switch.toggle: relay3
+        - switch.toggle: relay4
+        - switch.toggle: relay5
+    internal: true
+
+sensor:
+  - platform: bl0942
+    uart_id: uart_1
+    current: 
+      name: "Current"
+      filters: 
+        - throttle: ${sensor_update_interval}
+    voltage: 
+      name: "Voltage"
+      filters: 
+        - throttle: ${sensor_update_interval}
+    power: 
+      name: "Power"
+      filters:
+        - throttle: ${sensor_update_interval}
+    energy: 
+      name: "Energy"
+      filters:
+        - throttle: ${sensor_update_interval}
+    frequency: 
+      name: "Frequency"
+      filters:
+        - throttle: ${sensor_update_interval}
+    voltage_reference: ?? # DPS 22 (code: voltage_coe)
+    current_reference: ?? # DPS 23 * 10 (code: electric_coe)
+    power_reference: ??   # DPS 24 / 10 (code: power_coe)
+    energy_reference: ??  # DPS 25 (code: electricity_coe) 
+      
+      
