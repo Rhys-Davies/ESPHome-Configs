@@ -48,7 +48,6 @@ uart:
   tx_pin: P11
   baud_rate: 4800
   stop_bits: 1
-  parity: EVEN
 
 switch:
   - platform: gpio
