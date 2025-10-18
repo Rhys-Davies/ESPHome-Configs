@@ -44,8 +44,8 @@ captive_portal:
 
 uart:
   id: uart_1
-  rx_pin: RX1 
-  tx_pin: TX1
+  rx_pin: P10 
+  tx_pin: P11
   baud_rate: 4800
   stop_bits: 1
   parity: EVEN
