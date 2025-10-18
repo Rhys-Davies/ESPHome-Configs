@@ -57,32 +57,24 @@ switch:
     id: relay1
     icon: mdi:power-socket-au
     restore_mode: ${relay_restore_mode}
-
-switch:
   - platform: gpio
     name: "Relay 2"
     pin: P7
     id: relay2
     icon: mdi:power-socket-au
     restore_mode: ${relay_restore_mode}
-
-switch:
   - platform: gpio
     name: "Relay 3"
     pin: P8
     id: relay3
     icon: mdi:power-socket-au
     restore_mode: ${relay_restore_mode}
-
-switch:
   - platform: gpio
     name: "Relay 4"
     pin: P9
     id: relay4
     icon: mdi:power-socket-au
     restore_mode: ${relay_restore_mode}
-
-switch:
   - platform: gpio
     name: "Relay 5"
     pin: P24
