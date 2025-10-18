@@ -86,7 +86,7 @@ light:
     name: "Status LED"
     id: blue_led
     pin: 
-      inverted: true
+      inverted: false
       number: P28 
     internal: true
 
