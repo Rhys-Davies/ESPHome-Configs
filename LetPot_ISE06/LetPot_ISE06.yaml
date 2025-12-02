@@ -1,0 +1,75 @@
+substitutions:
+  name: "letpot-ISE06"
+  friendly_name: "LetPot ISE06"
+  relay_restore_mode: RESTORE_DEFAULT_OFF
+  sensor_update_interval: 10s
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  name_add_mac_suffix: true
+  
+  project:
+    name: esphome.letpot-ise06
+    version: "1.0"
+
+esp32:
+  variant: esp32c3
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+  - platform: esphome
+
+dashboard_import:
+  package_import_url: github://Rhys-Davies/ESPHome-Configs/LetPot_ISE06/LetPot_ISE06.yaml@main
+  import_full_config: true
+
+wifi:
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "LetPot ISE06 Fallback Hotspot"
+    password: "PP3OPhoEjXqU"
+
+captive_portal:
+
+switch:
+  - platform: gpio
+    name: "Pump"
+    pin: GPIO
+    id: pump
+    icon: mdi:
+    restore_mode: OFF
+
+light:
+  - platform: status_led
+    name: "Status LED"
+    id: blue_led
+    pin:
+      inverted: false
+      number: P8
+    internal: true
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: P24
+      mode:
+        input: true
+        pullup: true
+      inverted: true
+    name: "Button"
+    id: button
+    on_press:
+      then:
+        - switch.toggle: relay
+    internal: true
+      
+      

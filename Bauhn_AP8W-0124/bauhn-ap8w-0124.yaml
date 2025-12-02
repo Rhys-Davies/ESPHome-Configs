@@ -2,7 +2,7 @@ substitutions:
   name: "bauhn-ap8w-0124"
   friendly_name: "Bauhn AP8W-0124"
   relay_restore_mode: RESTORE_DEFAULT_OFF
-  sensor_update_interval: 10s
+  sensor_update_interval: 15s
 
 esphome:
   name: "${name}"
@@ -11,7 +11,7 @@ esphome:
   
   project:
     name: esphome.bauhn-ap8w-0124
-    version: "1.0"
+    version: "1.1"
 
 esp8266: #ESP-02S TYWE2S (esp8285)
   board: esp8285
@@ -32,6 +32,7 @@ dashboard_import:
 wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
+  power_save_mode: high
   ap:
     ssid: "AP8W-0124 Fallback Hotspot"
     password: "PP3OPhoEjXqU"
